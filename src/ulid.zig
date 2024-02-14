@@ -114,7 +114,7 @@ pub const Ulid = struct {
 
     /// Return the timestamp bits of the ulid
     pub fn timestamp(self: Ulid) u64 {
-        return @intCast(u64, (self.bits >> 80));
+        return @intCast((self.bits >> 80));
     }
 
     /// Return the random bits of the ulid
@@ -161,7 +161,7 @@ fn encodeBase32(bits: u128, dest: []u8) ![]u8 {
     const last_index = out_len - 1;
     const mask = @as(u128, 31);
     while (index < out_len) {
-        const encoding_idx = @intCast(u8, (remaining & mask));
+        const encoding_idx: u8 = @intCast((remaining & mask));
         dest[last_index - index] = encoding[encoding_idx];
         remaining >>= 5;
         index += 1;
